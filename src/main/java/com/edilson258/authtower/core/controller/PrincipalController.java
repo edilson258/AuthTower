@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/principals")
+@RequestMapping("api/principals")
 public class PrincipalController {
     private final PrincipalUseCaseCreate principalUseCaseCreate;
 
@@ -27,16 +27,15 @@ public class PrincipalController {
         this.principalUseCaseCreate = principalUseCaseCreate;
     }
 
-    @PostMapping
+    @PostMapping("/sign-up")
     public ResponseEntity<?> create(@Valid @RequestBody PrincipalCreateRequestBody body, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
         }
         try {
             PrincipalDTOCreate principalDTOCreate = PrincipalDTOCreate.fromRequestBody(body);
-            Principal principal = principalUseCaseCreate.execute(principalDTOCreate);
-            PrincipalView principalView = PrincipalView.fromPrincipal(principal);
-            return ResponseEntity.status(HttpStatus.CREATED).body(principalView);
+            String jwtAccessToken = principalUseCaseCreate.execute(principalDTOCreate);
+            return ResponseEntity.status(HttpStatus.CREATED).body(jwtAccessToken);
         } catch (AuthTowerException e) {
             return ExceptionMapper.mapAuthTowerExceptionToResponseIdentity(e);
         }

@@ -1,11 +1,11 @@
 package com.edilson258.authtower.core.entity;
 
-public class UserIdentity {
+public class Principal {
     private final String id;
     private final String email;
     private final String passwordHash;
 
-    public UserIdentity(String id, String email, String passwordHash) {
+    public Principal(String id, String email, String passwordHash) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;

@@ -5,11 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 //
-import com.edilson258.authtower.core.entity.UserIdentity;
+import com.edilson258.authtower.core.entity.Principal;
 
 @Entity
-@Table(name = "users")
-public class UserJpaEntity {
+@Table(name = "principals")
+public class PrincipalJPA {
     @Id
     private String id;
 
@@ -19,14 +19,17 @@ public class UserJpaEntity {
     @Column
     private String passwordHash;
 
-    public UserJpaEntity(String id, String email, String passwordHash) {
+    public PrincipalJPA() {
+    }
+
+    public PrincipalJPA(String id, String email, String passwordHash) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;
     }
 
-    public static UserJpaEntity from(UserIdentity userIdentity) {
-        return new UserJpaEntity(userIdentity.getId(), userIdentity.getEmail(), userIdentity.getPasswordHash());
+    public static PrincipalJPA from(Principal principal) {
+        return new PrincipalJPA(principal.getId(), principal.getEmail(), principal.getPasswordHash());
     }
 
     public String getId() {
@@ -53,7 +56,7 @@ public class UserJpaEntity {
         this.passwordHash = passwordHash;
     }
 
-    public UserIdentity toDomain() {
-        return new UserIdentity(this.id, this.email, this.passwordHash);
+    public Principal toDomain() {
+        return new Principal(this.id, this.email, this.passwordHash);
     }
 }

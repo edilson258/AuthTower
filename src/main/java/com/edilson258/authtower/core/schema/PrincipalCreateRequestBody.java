@@ -2,7 +2,7 @@ package com.edilson258.authtower.core.schema;
 
 import jakarta.validation.constraints.*;
 
-public record UserCreateRequestBody(
+public record PrincipalCreateRequestBody(
         @NotBlank(message = "Email field is required")
         @Email(message = "Email must be valid")
         String email,

@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
+@Service
 public class PrincipalUseCaseCreate {
     private final PrincipalRepository principalRepository;
 

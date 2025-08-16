@@ -8,6 +8,8 @@ record PrincpalCreateForm(String email, String password) {
 record PrincipalView(String id, String email, String password) {
 }
 
+@RestController
+@RequestMapping("/principals")
 public class PrincipalController {
     private final PrincipalUseCaseCreate principalUseCaseCreate;
 
@@ -15,7 +17,8 @@ public class PrincipalController {
         this.principalUseCaseCreate = principalUseCaseCreate;
     }
 
-    public Principal create(PrincpalCreateForm form) {
+    @PostMapping
+    public Principal create(@RequestBody PrincpalCreateForm form) {
         PrincipalCreateDTO dto = new PrincipalCreateDTO(form.email(), form.password());
         Principal principal = this.principalUseCaseCreate.execute(dto);
         return principal;

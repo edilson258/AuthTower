@@ -2,13 +2,14 @@ package com.example.demo;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
 @Repository
 public class PrincipalRepositoryImpl implements PrincipalRepository {
-    private final ArrayList<Principal> principals;
+    private final List<Principal> principals;
 
     PrincipalRepositoryImpl() {
         principals = new ArrayList<>();

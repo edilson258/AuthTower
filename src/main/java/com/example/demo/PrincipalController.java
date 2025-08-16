@@ -1,11 +1,10 @@
 package com.example.demo;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-record PrincpalCreateForm(String email, String password) {
-}
-
-record PrincipalView(String id, String email, String password) {
+record PrincipalCreateForm(String email, String password) {
 }
 
 @RestController
@@ -18,9 +17,13 @@ public class PrincipalController {
     }
 
     @PostMapping
-    public Principal create(@RequestBody PrincpalCreateForm form) {
+    public ResponseEntity create(@RequestBody PrincipalCreateForm form) {
         PrincipalCreateDTO dto = new PrincipalCreateDTO(form.email(), form.password());
-        Principal principal = this.principalUseCaseCreate.execute(dto);
-        return principal;
+        try {
+            Principal principal = this.principalUseCaseCreate.execute(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(principal);
+        } catch (PrincipalUseCaseCreateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 }

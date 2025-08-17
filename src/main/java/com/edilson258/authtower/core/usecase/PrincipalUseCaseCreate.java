@@ -31,7 +31,6 @@ public class PrincipalUseCaseCreate {
         String userId = UUID.randomUUID().toString();
         Principal principal = new Principal(userId, principalDTOCreate.email(), principalDTOCreate.password());
         principalRepository.save(principal);
-        String jwtAccessToken = jwtService.generateAccessToken(userId, Constants.accessTokenDuration15m);
-        return jwtAccessToken;
+        return jwtService.generateAccessToken(userId, Constants.accessTokenDuration15m);
     }
 }

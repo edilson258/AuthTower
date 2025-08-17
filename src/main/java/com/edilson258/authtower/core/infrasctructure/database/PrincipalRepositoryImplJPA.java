@@ -12,11 +12,11 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public class PrincipalRepositoryImplementationJPA implements PrincipalRepository {
+public class PrincipalRepositoryImplJPA implements PrincipalRepository {
     private final PrincipalRepositoryJPA principalRepositoryJPA;
     private final EntityManager entityManager;
 
-    public PrincipalRepositoryImplementationJPA(PrincipalRepositoryJPA principalRepositoryJPA, EntityManager entityManager) {
+    public PrincipalRepositoryImplJPA(PrincipalRepositoryJPA principalRepositoryJPA, EntityManager entityManager) {
         this.principalRepositoryJPA = principalRepositoryJPA;
         this.entityManager = entityManager;
     }

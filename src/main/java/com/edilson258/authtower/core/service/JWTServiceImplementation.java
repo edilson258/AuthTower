@@ -15,12 +15,6 @@ public class JWTServiceImplementation implements JWTService {
     @Value("${jwt.secret:mySecretKey123456789012345678901234567890}")
     private String secret;
 
-    @Value("${jwt.access-expiration:900000}") // 15 minutes
-    private long accessExpiration;
-
-    @Value("${jwt.refresh-expiration:604800000}") // 7 days
-    private long refreshExpiration;
-
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
